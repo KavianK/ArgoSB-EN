@@ -1,10 +1,10 @@
-## ArgoSB一键无交互小钢炮脚本💣【当前版本：V25.7.15】
+## ArgoSB-EN one-click non-interactive small steel cannon script 💣 [Current version: V25.7.15]
 
 <img width="636" height="238" alt="0cbc3f82134b4fc99afd6cee37e98be" src="https://github.com/user-attachments/assets/a76ca418-badb-4e9a-a771-6682ec713e06" />
 
-#### 1、基于Sing-box + Xray + Cloudflared-Argo 三内核自动分配
+#### 1. Automatic allocation based on Sing-box + Xray + Cloudflared-Argo three cores
 
-#### 2、支持Docker Image镜像部署，公开镜像库：```ygkkk/argosb```
+#### 2. Support Docker Image deployment, public image library: ```ygkkk/argosb```
 
 #### 3、SSH脚本主打极简轻便，几乎无需依赖，支持非root，兼容所有主流VPS系统
 
