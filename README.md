@@ -6,22 +6,22 @@
 
 #### 2. Support Docker Image deployment, public image library: ```ygkkk/argosb```
 
-#### 3、SSH脚本主打极简轻便，几乎无需依赖，支持非root，兼容所有主流VPS系统
+#### 3. The SSH script is extremely simple and lightweight, almost without dependencies, supports non-root, and is compatible with all mainstream VPS systems
 
-#### 4、支持NIX容器系统，特别推荐IDX-Google、Clawcloud爪云类的服务器
+#### 4. Support NIX container system, especially recommend IDX-Google, Clawcloud and other servers
 
-#### 5、指定内核可选Wireguard-WARP全局出站模式，更换落地IP为WARP的IP
+#### 5. Specify the kernel optional Wireguard-WARP global outbound mode and change the landing IP to WARP IP
 
-#### 6、所有代理协议都无需域名，选择自由度高，支持单个或多个代理协议任意组合
-【目前支持：AnyTLS、Vless-xhttp-reality、Vless-reality-vision、Vmess-ws、Hy2、Tuic、Argo临时/固定隧道】
+#### 6. All proxy agreements do not require a domain name, with high freedom of choice, supporting any combination of single or multiple proxy agreements
+【Currently supported：AnyTLS、Vless-xhttp-reality、Vless-reality-vision、Vmess-ws、Hy2、Tuic、Argo Temporary/Fixed Tunnels】
 
-#### 7、如需要多样的功能，推荐使用VPS专用四合一脚本[Sing-box-yg](https://github.com/yonggekkk/sing-box-yg)
+#### 7. If you need a variety of functions, it is recommended to use the VPS-specific four-in-one script[Sing-box-yg](https://github.com/yonggekkk/sing-box-yg)
 
 ----------------------------------------------------------
 
-### 一、自定义变量参数说明：
+### 1. Custom variable parameter description：
 
-| 变量意义 | 变量名称| 变量值""填写| 删除变量 | 变量值""留空 | 变量要求及说明 |
+| Variable meaning | Variable name | Fill in variable value | Delete variable | Leave variable value blank | Variable requirements and instructions |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1、启用vless-reality-vision | vlpt | 端口指定 | 关闭vless-reality-vision | 端口随机 | 必选之一 【xray内核：TCP】 |
 | 2、启用vless-xhttp-reality | xhpt | 端口指定 | 关闭vless-xhttp-reality | 端口随机 | 必选之一 【xray内核：TCP】 |
@@ -43,31 +43,31 @@
 ![f776f1b3b1e0ebe9a537baf8660a387](https://github.com/user-attachments/assets/b9b357de-85b8-4270-aa87-2f50d63d672e)
 
 
-#### 使用```ygkkk/argosb```镜像注意：
+#### Notes when using the ```ygkkk/argosb``` image：
 
-1、uuid变量建议都加上，重启后uuid将保持不变
+1. It is recommended to add uuid variables. UUID will remain unchanged after restart.
 
-2、点击restart重启，即可自动更新镜像，但reality协议相关key会被重置，需重新导出reality节点
+2. Click restart to automatically update the image, but the key related to the reality protocol will be reset and the reality node needs to be exported again.
 
-3、argo临时隧道重启后，临时域名会变，需重新导出argo节点，固定隧道则不变
+3. After the argo temporary tunnel is restarted, the temporary domain name will change and the argo node needs to be re-exported. The fixed tunnel will remain unchanged.
 
-4、xray/sing-box/argo三内核同时运行会触发某些docker容器限制，出现报错，建议最多同时运行两个内核
+4. Running xray/sing-box/argo kernels at the same time will trigger some docker container restrictions and cause errors. It is recommended to run at most two kernels at the same time
 
-#### 使用VPS注意：
+#### Note when using VPS:
 
-1、uuid留空随机生成后，重启后uuid将保持不变
+1. After leaving uuid blank and generating it randomly, uuid will remain unchanged after restart
 
-2、更新脚本只能卸载重装，建议留存带变量的脚本，方便快速重装
+2. Update scripts can only be uninstalled and reinstalled. It is recommended to keep the script with variables for quick reinstallation
 
-3、argo临时隧道重启后，临时域名会变，需重新导出argo节点，固定隧道则不变
+3. After the argo temporary tunnel is restarted, the temporary domain name will change and the argo node needs to be re-exported. The fixed tunnel will remain unchanged
 
-4、如果已安装了warp脚本，这将与argosb内置warp冲突，两者必须选其一
+4. If the warp script has been installed, it will conflict with the built-in warp of argosb. You must choose one of them
 
 ----------------------------------------------------------
 
-### 二、SSH一键变量脚本模版：
+### 2. SSH one-key variable script template:
 
-注意：变量值填写在""之间，变量之间空一格，不用的变量可以删除
+Note: Fill in the variable value between "", leave one space between variables, and unused variables can be deleted
 
 ```
 vlpt="" vmpt="" hypt="" tupt="" xhpt="" anpt="" warp="" uuid="" reym="" argo="" agn="" agk="" ip="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
@@ -75,24 +75,24 @@ vlpt="" vmpt="" hypt="" tupt="" xhpt="" anpt="" warp="" uuid="" reym="" argo="" 
 
 ----------------------------------------------------------
 
-### 三、SSH一键脚本的三类组合推荐：
+### 3. Three combinations of SSH one-key scripts are recommended:
 
-1：全协议共存或者单协议 + Argo临时/固定隧道
+1: All protocols coexist or single protocol + Argo temporary/fixed tunnel
 ```
 vlpt="" vmpt="" hypt="" tupt="" xhpt="" anpt="" argo="y" agn="" agk="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
 ```
 
-2：仅argo临时隧道，固定隧道必须填写端口(vmpt)、域名(agn)、token(agk)
+2: Only argo temporary tunnel, fixed tunnel must fill in port (vmpt), domain name (agn), token (agk)
 
-类似无公网的IDX-Google-VPS容器推荐使用此脚本，快速一键内网穿透获取节点
+Similar to IDX-Google-VPS containers without public network, it is recommended to use this script to quickly penetrate the intranet and obtain nodes with one click
 
 ```
 vmpt="" argo="y" agn="" agk="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
 ```
 
-3：单协议，主流UPD协议或者TCP协议单独运行
+3: Single protocol, mainstream UPD protocol or TCP protocol runs alone
 
-hy2为例：以下脚本启用hy2变量hypt，其他协议变量参考变量参数说明
+Take hy2 as an example: the following script enables the hy2 variable hypt, and other protocol variables refer to the variable parameter description
 
 ```
 hypt="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
@@ -100,68 +100,68 @@ hypt="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/
 
 ---------------------------------------------------------
 
-### 四、SSH快捷方式 (首次安装成功后需重连SSH，agsb快捷方式才可生效)：
+### 4. SSH shortcut (after the first successful installation, you need to reconnect to SSH for the agsb shortcut to take effect):
 
- 1、查看Argo的固定域名、固定隧道的token、临时域名、当前已安装的节点信息：
+1. View Argo's fixed domain name, fixed tunnel token, temporary domain name, and currently installed node information:
 
-```agsb list``` 或者 ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
+```agsb list``` or ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
 
- 2、在线切换IPV4/IPV6节点配置 (双栈VPS专享)：
+ 2、Online switching of IPV4/IPV6 node configuration (exclusive for dual-stack VPS):
 
-显示IPV4节点配置：
+Display IPV4 node configuration:
 
-```ip=4 agsb list```或者```ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
+```ip=4 agsb list```or```ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
 
-显示IPV6节点配置：
+Display IPV6 node configuration:
 
-```ip=6 agsb list```或者```ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
+```ip=6 agsb list```or```ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list```
 
- 3、重启脚本：
+ 3、Restart Script：
 
-```agsb res``` 或者 ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) res```
+```agsb res``` or ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) res```
 
- 4、卸载脚本：
+ 4、Uninstall Script：
 
-```agsb del``` 或者 ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del```
-
-----------------------------------------------------------
-
-
-#### 相关教程可参考甬哥博客，视频教程如下：
-
-最新推荐：[Clawcloud爪云、IDX Google VPS的福音：解决服务器IP访问困扰！Argosb脚本新增WARP出站功能，轻松更换落地IP为Cloudflare WARP IP](https://youtu.be/HO_XLBmIYJw)
-
-[Claw.cloud免费VPS搭建代理最终教程（五）：ArgoSB脚本docker镜像更新支持AnyTLS、Xhttp-Reality](https://youtu.be/-mhZIhHRyno)
-
-[Claw.cloud免费VPS搭建代理最终教程（四）：最低仅1美分，4套价格+7组协议的套餐组合任你选；查看节点、重启升级、更换IP、更改配置的操作说明](https://youtu.be/xOQV_E1-C84)
-
-[Claw.cloud免费VPS搭建代理最终教程（三）：ArgoSB全能docker镜像发布，支持网页实时更新节点；TCP/UDP直连协议设置客户端"CDN"免墙域名](https://youtu.be/JEXyj9UoMzU)
-
-[Claw.cloud免费VPS搭建代理最终教程（二）：最低仅需2美分；支持Argo | Reality | Vmess | Hysteria2 | Tuic代理协议任意组合](https://youtu.be/NnuMgnJqon8)
-
-[Claw.cloud免费VPS搭建代理最终教程（一）：全网最简单 | 两大无交互回车脚本 | 套CDN优选IP | workers反代 | ArgoSB隧道搭建](https://youtu.be/Esofirx8xrE)
-
-[IDX Google免费VPS代理搭建教程（二）：ArgoSB一键代理脚本发布 | 一次回车搞定一切 | 懒人小白最强Argo代理节点脚本](https://youtu.be/OoXJ_jxoEyY)
-
-[IDX Google免费VPS代理搭建教程（三）：NIX容器最新工作区方式搭建Argo免费节点 | 一次回车搞定一切 | Argo固定隧道一键复活](https://youtu.be/0I5eI1KKx08)
-
-[IDX Google免费VPS代理搭建教程（四）：支持重置后自动启动代理节点功能 | 最简单的保活方法](https://youtu.be/EGrz6Wvevqc)
-
-更新中……
+```agsb del``` or ```bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del```
 
 ----------------------------------------------------------
 
-### 交流平台：[甬哥博客地址](https://ygkkk.blogspot.com)、[甬哥YouTube频道](https://www.youtube.com/@ygkkk)、[甬哥TG电报群组](https://t.me/+jZHc6-A-1QQ5ZGVl)、[甬哥TG电报频道](https://t.me/+DkC9ZZUgEFQzMTZl)
+
+#### For related tutorials, please refer to Yongge's blog. The video tutorial is as follows:
+
+Latest recommendation: [Good news for Clawcloud and IDX Google VPS: Solve the problem of server IP access! Argosb script adds WARP outbound function, easily changing the landing IP to Cloudflare WARP IP](https://youtu.be/HO_XLBmIYJw)
+
+[Final tutorial for Claw.cloud free VPS proxy setup (V): ArgoSB script docker image update supports AnyTLS and Xhttp-Reality](https://youtu.be/-mhZIhHRyno)
+
+[Final tutorial for Claw.cloud free VPS proxy setup (IV): As low as 1 cent, 4 price + 7 protocol packages are available for you to choose; instructions for viewing nodes, restarting and upgrading, changing IP, and changing configuration](https://youtu.be/xOQV_E1-C84)
+
+[Claw.cloud Free VPS Proxy Setup Final Tutorial (III): ArgoSB all-purpose docker image release, support for real-time web page node update; TCP/UDP direct connection protocol setting client "CDN" free domain name](https://youtu.be/JEXyj9UoMzU)
+
+[Claw.cloud Free VPS Proxy Setup Final Tutorial (II): As low as 2 cents; support any combination of Argo | Reality | Vmess | Hysteria2 | Tuic proxy protocols](https://youtu.be/NnuMgnJqon8)
+
+[Claw.cloud Free VPS Proxy Setup Final Tutorial (I): The simplest in the entire network | Two non-interactive carriage return scripts | CDN preferred IP | Workers reverse generation | ArgoSB tunnel setup](https://youtu.be/Esofirx8xrE)
+
+[IDX Google Free VPS Proxy Setup Tutorial (II): ArgoSB One-Click Proxy Script Release | One-Click Enter to Get Everything Done | Lazy Newbie's Strongest Argo Proxy Node Script](https://youtu.be/OoXJ_jxoEyY)
+
+[IDX Google Free VPS Proxy Setup Tutorial (III): NIX Container Latest Workspace Method to Build Argo Free Node | One-Click Enter to Get Everything Done | Argo Fixed Tunnel One-Click Resurrection](https://youtu.be/0I5eI1KKx08)
+
+[IDX Google Free VPS Proxy Setup Tutorial (IV): Supports Automatically Starting Proxy Node Function After Reset | The Easiest Way to Keep Alive](https://youtu.be/EGrz6Wvevqc)
+
+Updating...
 
 ----------------------------------------------------------
-### 感谢支持！微信打赏甬哥侃侃侃ygkkk
+
+### Communication platform: [Yongge blog address](https://ygkkk.blogspot.com), [Yongge YouTube channel](https://www.youtube.com/@ygkkk), [Yongge TG Telegram Group](https://t.me/+jZHc6-A-1QQ5ZGVl), [Yongge TG Telegram Channel](https://t.me/+DkC9ZZUgEFQzMTZl)
+
+----------------------------------------------------------
+### Thank you for your support! WeChat reward Yongge Kankankanygkkk
 ![41440820a366deeb8109db5610313a1](https://github.com/user-attachments/assets/e5b1f2c0-bd2c-4b8f-8cda-034d3c8ef73f)
 
 ----------------------------------------------------------
-### 感谢你右上角的star🌟
+### Thank you for the star in the upper right corner🌟
 [![Stargazers over time](https://starchart.cc/yonggekkk/ArgoSB.svg)](https://starchart.cc/yonggekkk/ArgoSB)
 
 ----------------------------------------------------------
-### 声明：所有代码来源于Github社区与ChatGPT的整合
+### Disclaimer: All codes come from the integration of Github community and ChatGPT
 
 ### Thanks to [VTEXS](https://console.vtexs.com/?affid=1558) for the sponsorship support
